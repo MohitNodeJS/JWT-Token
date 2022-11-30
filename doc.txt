@@ -1,0 +1,77 @@
+
+npm i soft-delete-plugin-mongoose
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----  MIDDLEWARE  ---  ///
+Middleware functions are functions that have access to the request object (req),the response object (res),
+and the next middleware function in the application’s request-response cycle. 
+ The next middleware function is commonly denoted by a variable named next.
+
+Middleware functions can perform the following tasks:
+
+Execute any code.
+Make changes to the request and the response objects.
+End the request-response cycle.
+Call the next middleware function in the stack.
+
+If the current middleware function does not end the request-response cycle, it must call next() 
+to pass control to the next middleware function. Otherwise, the request will be left hanging.
+
+USES :-Application-level middleware
+Router-level middleware
+Error-handling middleware
+Built-in middleware
+Third-party middleware
+
+
+
+
+
+///------express.static/ json /urlencoded   ------------------/////
+
+express.static serves static assets such as HTML files, images, and so on.
+express.json parses incoming requests with JSON payloads. NOTE: Available with Express 4.16.0+
+express.urlencoded parses incoming requests with URL-encoded payloads. 
+
+
+
+//---------------------------------
+npm init : can be used to set up a new or existing npm package
+
+
+//---------------------------------
+npm i express : 
+It is used to build web-apps using approaches and principles of Node.js.
+More features than Node.js.
+It is built on Node.js.
+Framework based on Node.js.
+Controllers are provided.
+Routing is provided.
+Uses middleware for the arrangement of functions systematically server-side.
+It requires less coding time.

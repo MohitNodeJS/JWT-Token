@@ -1,11 +1,11 @@
 class Response{
-    success(req,data,statuscode=200){
+    success(res,data,statuscode=200){
         let resPayload={
-                ststus:true,
+                status:true,
                 message:data.message,
                 payload:data.payload
         }
-        res.status(statuscode).send(resPayload)
+        return res.status(statuscode).send(resPayload)
      }
      error(res,data,statusCode=200) {
         let resPayload = {
@@ -13,7 +13,8 @@ class Response{
             message: data.message,
             payload: data.payload
         }
-        res.status(statusCode).send(resPayload);
+        
+       return  res.status(statusCode).send(resPayload);
     }
 }
 

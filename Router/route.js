@@ -1,14 +1,19 @@
-// import multer from "multer";
-// import { Schema } from "mongoose";
 import userServices from "../Services/userServices.js";
-import JoiMiddleware from "../middleware/joiMiddleware.js";
+import JoiMainMiddleware from "../middleware/joiMiddleware.js";
+import authValidaton from "../middleware/authMiddleware.js";
 
-const Route=(app)=>{
-    app.get('/user/:id', JoiMiddleware, userServices.adduser);
-    app.get('/users', JoiMiddleware, userServices.adduser);
-    app.post('/user', JoiMiddleware, userServices.adduser);
-    app.put('/user', JoiMiddleware, userServices.adduser);
-}
-
+const Route = (app) => {
+  app.post("/register", JoiMainMiddleware.JoiMiddleware, userServices.register);
+  app.post("/login", JoiMainMiddleware.JoiMiddleware, userServices.login);
+  app.get("/profile", authValidaton, userServices.myprofile);
+  app.put(
+    "/profile",
+    [authValidaton, JoiMainMiddleware.JoiMiddleware],
+    userServices.updateById
+  );
+  app.delete("/delete",userServices.softDelete)
+  // app.delete("/delete",
+  // userServices.deleteByID)
+};
 
 export default Route;

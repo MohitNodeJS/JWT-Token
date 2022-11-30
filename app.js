@@ -4,14 +4,18 @@ import bodyparser from 'express'
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 import mongoose from 'mongoose';
 import Route from './Router/route.js';
-mongoose.connect('mongodb://localhost:27017/user').then(()=>{
-    console.log('mongoose is connected')
+mongoose.connect(process.env.MONGODB_CONNECTION).then(()=>{
+    console.log(process.env.CONNECTED)
 }).catch((err)=>{
-    console.log("cant connect to database",err)
+    console.log(process.env.NOT_CONNECTED,err)
 })
 
 Route(app)
 
-app.listen(3100)
+app.listen(process.env.PORT)
+//app.listen(3100)
