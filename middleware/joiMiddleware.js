@@ -25,6 +25,7 @@ class JoiMainMiddleware{
         }
         next();   
     }
+   
 }
 
 export default new JoiMainMiddleware;

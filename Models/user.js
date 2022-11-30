@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
+//import { boolean } from "joi";
 
 //soft delete
 const { softDeletePlugin } = require('soft-delete-plugin-mongoose');
@@ -25,6 +26,10 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    // delete:{
+    //   type:Boolean,
+    //   default:false
+    // }
   },
   { timestamps: true }
 );
@@ -32,10 +37,11 @@ const userSchema = new Schema(
 //soft delete
 userSchema.plugin(softDeletePlugin);
 
+//save case password bcrypt
 userSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(12);
-    const passwordhash = await bcrypt.hash(this.password, salt);
+    const passwordhash = await bcrypt.hash(this.password, 10);//10 :salt value
     this.password = passwordhash;
     next();
   } catch {
@@ -43,6 +49,20 @@ userSchema.pre("save", async function (next) {
   }
 });
 
+//update case password bcrypt
+userSchema.pre("findOneAndUpdate", async function (next) {
+  try {
+    if (this._update.password) {
+      const passwordhash = await bcrypt.hash(this._update.password, 10);
+      this._update.password = passwordhash;
+    }
+     next();
+  }
+  catch {
+   return  next(error)
+
+  }
+});
+
 let _user = mongoose.model("user", userSchema);
-//let _user = mongoose.model("user", userSchema,softDeletePlugin);
 export default _user;

@@ -11,9 +11,7 @@ const Route = (app) => {
     [authValidaton, JoiMainMiddleware.JoiMiddleware],
     userServices.updateById
   );
-  app.delete("/delete",userServices.softDelete)
-  // app.delete("/delete",
-  // userServices.deleteByID)
+  app.post("/delete", authValidaton, userServices.softDelete);
 };
 
 export default Route;

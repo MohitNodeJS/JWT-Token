@@ -1,4 +1,27 @@
-# CRUD Using JWT-Token & express-validation
+# CRUD Using JWT-Token, express-validation, 
+
+>> Express Framework: fast, assertive, essential and moderate web framework of Node.js
+>> Mongoose :Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
+>> JWT Token :JSON Web Token (JWT) is a URL-safe  transferred between two parties.
+>> bcrypt : Allows building a password security platform
+>>.env: Environment Variables
+>> soft-delete-plugin-mongoose : soft delete documents and restore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Cmd:
   1.) npm init
@@ -9,3 +32,5 @@ Cmd:
   6.) npm i esm
   7.) npm i dotenv
   8.) npm i bcryptjs
+  9.) npm i soft-delete-plugin-mongoose
+  
