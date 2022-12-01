@@ -1,5 +1,15 @@
 # CRUD Using JWT-Token, express-validation, 
 
+Project Run Command
+>> npm i
+>> npm start
+
+Package Version:
+>>node -v : v16.17.1
+>>npm list express: express@4.18.2
+
+
+>>Middleware
 >> Express Framework: fast, assertive, essential and moderate web framework of Node.js
 >> Mongoose :Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 >> JWT Token :JSON Web Token (JWT) is a URL-safe  transferred between two parties.

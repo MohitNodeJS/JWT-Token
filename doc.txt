@@ -1,3 +1,7 @@
+git branch
+ git status
+ git add .
+
 
 //Register
 POST: 127.0.0.1:3100/register

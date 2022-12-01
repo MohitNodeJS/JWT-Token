@@ -1,3 +1,5 @@
+import MESSAGES from "../middleware/commonMessage";
+
 class Response {
   success(res, data, statuscode = 200) {
     let resPayload = {
@@ -7,13 +9,14 @@ class Response {
     };
     return res.status(statuscode).send(resPayload);
   }
-  error(res, data, statusCode = 200) {
+  error(res, data={}, statusCode = 500) {
     let resPayload = {
       status: false,
-      message: data.message,
+      message:MESSAGES.SERVER_ERROR ,
+       //message: data.message,
       payload: data.payload,
     };
-
+    
     return res.status(statusCode).send(resPayload);
   }
 }

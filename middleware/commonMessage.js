@@ -11,9 +11,11 @@ const MESSAGES={
     PAYLOAD_ERROR:'Validation Error',//D
     DELETE_NOT_FOUND:"User Not Found",
     DELETE_USER:"User Deleted",
-    DELETE_ERROR:"Not Working",
+    //DELETE_ERROR:"Not Working",
     LOGIN_USER_DELECTED:"User account deleted",
     UPDATED_ERROR:"error",
-    LOGIN_DELETE:"Not Login: Because User Data  Deleted on DB "
+    LOGIN_DELETE:"Not Login: Because User Data  Deleted on DB ",
+    SERVER_ERROR:"Something went wrong, Please try agian",
+    EMAIL__SUCCESS:"Successfully Uploaded"
 }
 export default MESSAGES

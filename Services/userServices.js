@@ -6,23 +6,46 @@ import MESSAGES from "../middleware/commonMessage.js";
 
 class userServices {
   //Register User
-  register(req, res) {
-    let myUser = new _user(req.body);
-    myUser
-      .save()
-      .then((value) => {
+  async register(req, res) {
+    try {
+      let email = await _user.findOne({ email: req.body.email });
+      if (email) {
         let resPayload = {
-          message: MESSAGES.REGISTER_SUCCESS,
-          //payload:myUser
+          message: MESSAGES.EMAIL,
         };
         return Response.success(res, resPayload);
-      })
-      .catch((err) => {
-        let resPayload = {
-          message: MESSAGES.REGISTER_ERROR,
-        };
-        return Response.error(res, resPayload);
-      });
+        //return Response.send(res, resPayload);
+      }
+      let myUser = new _user(req.body);
+      myUser.save();
+      let resPayload = {
+        message: MESSAGES.EMAIL__SUCCESS,
+      };
+      return Response.success(res, resPayload);
+    } catch (err) {
+      let resPayload = {
+        message: err.message,
+        payload: {},
+      };
+      return Response.error(res, resPayload);
+    }
+    //   let myUser = new _user(req.body);
+    // myUser
+    //   .save()
+    //   .then((value) => {
+    //     let resPayload = {
+    //       message: MESSAGES.REGISTER_SUCCESS,
+    //       //payload:myUser
+    //     };
+    //     return Response.success(res, resPayload);
+    //   })
+
+    // .catch((err)=>{
+    //     let resPayload = {
+    //       message: MESSAGES.REGISTER_ERROR,
+    //     };
+    //     return Response.error(res, resPayload);
+    //   });
   }
 
   //Login
@@ -50,7 +73,7 @@ class userServices {
         if (!validPassword)
           return res.status(400).send(MESSAGES.LOGIN_PASSWORD_IN_CORRECT);
         const token = jwt.sign({ _id: ExtUser._id }, "mytoken", {
-          expiresIn: "30s",
+          expiresIn: "30m",
         });
         return res.status(200).send({
           message: MESSAGES.LOGIN_SUCCESS,
@@ -71,11 +94,12 @@ class userServices {
   async updateById(req, res) {
     try {
       const ExtUser = await _user.findOne({ email: req.body.email });
+      // console.log(ExtUser)
       if (ExtUser) {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
-        return Response.error(res, resPayload);
+        return Response.success(res, resPayload);
       }
       const updateId = req.user._id;
       const user = await _user
@@ -83,7 +107,7 @@ class userServices {
         .select("firstName lastName email");
       let resPayload = {
         message: MESSAGES.UPDATED_SUCCESS,
-        //payload: user,
+        //payload: user
       };
       return Response.success(res, resPayload);
     } catch (err) {
@@ -106,7 +130,7 @@ class userServices {
           message: MESSAGES.DELETE_NOT_FOUND,
           //payload: {},
         };
-        return Response.error(res, resPayload);
+        return Response.success(res, resPayload);
       }
       const myUser = await _user
         .findByIdAndUpdate(id, { isDeleted: true })
@@ -115,10 +139,15 @@ class userServices {
             message: MESSAGES.DELETE_USER,
             //payload: {},
           };
-          return Response.error(res, resPayload);
+          return Response.success(res, resPayload);
         });
     } catch (error) {
-      res.status(500).send(MESSAGES.DELETE_ERROR);
+      //res.status(500).send(MESSAGES.DELETE_ERROR);
+      let resPayload = {
+        message: err.message,
+        payload: {},
+      };
+      return Response.error(res, resPayload);
     }
   }
 
@@ -140,5 +169,16 @@ class userServices {
       return Response.error(res, resPayload);
     }
   }
+
+  //multer
+  // multer(req,res){
+  //   try {
+  //     res.send(req.files)
+  //   } catch (error) {
+  //     res.json({
+  //       error,
+  //     });
+  //   }
+  // }
 }
 export default new userServices();
