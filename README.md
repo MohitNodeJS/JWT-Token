@@ -7,14 +7,23 @@
 
 ## Package Version:
   node : v16.17.1
+  
   express: express@4.18.2
+  
   bcryptjs: "^2.4.3",
+  
   esm: "^3.2.25",
+  
   express-validation: "^4.1.0",
+  
   joi: "^17.7.0",
+  
   jsonwebtoken: "^8.5.1",
+  
   mongoose: "^6.7.3",
+  
   multer: "^1.4.5-lts.1",
+  
   soft-delete-plugin-mongoose: "^1.0.15"
 
 ## CRUD API Link & Working:
