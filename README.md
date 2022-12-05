@@ -18,10 +18,10 @@
 
 ## CRUD API Link & Working:
   * USER Register :POST API  --   (http://127.0.0.1:3100/register)
-    --firstName: Required, text Limit 3 to 15 
+    -- firstName: Required, text Limit 3 to 15 --
     lastName: Optional, text Limit 3 to 15
     email: Required, text Limit 3 to 50 , Duplicate Validation
-    password : Convert bcrypt, Limit 5 to 15--
+    password : Convert bcrypt, Limit 5 to 15
 
   * USER LOGIN : POST API -- (http://127.0.0.1:3100/login)
     Email & Password are required  
