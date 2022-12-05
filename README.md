@@ -40,19 +40,26 @@
 
 
 ## Package Explanation
-*  Express Framework: fast, assertive, essential and moderate web framework of Node.js
+* ####  Express Framework:
+ fast, assertive, essential and moderate web framework of Node.js
 
-* Mongoose :Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
+*  #### Mongoose :
+Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 
-* JWT Token :JSON Web Token (JWT) is a URL-safe  transferred between two parties.
+*  #### JWT Token :
+JSON Web Token (JWT) is a URL-safe  transferred between two parties.
 
-* bcrypt : Allows building a password security platform
+* #### bcrypt : 
+Allows building a password security platform
 
-* .env: Environment Variables
+* #### .env:
+ Environment Variables
 
-* soft-delete-plugin-mongoose : soft delete documents and restore
+* #### soft-delete-plugin-mongoose : 
+soft delete documents and restore
 
-* Middleware : Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
+*  #### Middleware : 
+Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
 
 
 ## SetUp Development Environment
