@@ -3,6 +3,8 @@ import Response from "../helpers/responseHelper.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../middleware/commonMessage.js";
+import address from "../Models/address";
+
 // import uploadImage from "../helpers/multerHelper";
 // import e, { response } from "express";
 
@@ -10,15 +12,36 @@ class userServices {
   //Register User
   async register(req, res) {
     try {
+
+      //email 
       let email = await _user.findOne({ email: req.body.email });
       if (email) {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
         return Response.success(res, resPayload);
-        //return Response.send(res, resPayload);
       }
-      let myUser = new _user(req.body);
+
+      //address
+      let addressInput={
+        houseNo:req.body.address.houseNo,
+        city:req.body.address.city,
+        state:req.body.address.state,
+        pincode:req.body.address.pincode,
+        country:req.body.address.country
+      }
+      let myAddress = new address(addressInput);
+      myAddress.save();
+   
+      let userInput={
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        email:req.body.email,
+        password:req.body.password
+      }
+
+      //save
+      let myUser = new _user(userInput);
       myUser.save();
       let resPayload = {
         message: MESSAGES.EMAIL__SUCCESS,

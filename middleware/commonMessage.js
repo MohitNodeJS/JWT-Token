@@ -18,6 +18,7 @@ const MESSAGES={
     SERVER_ERROR:"Something went wrong, Please try agian",
     EMAIL__SUCCESS:"Successfully Uploaded",
     FILE_UPLOADED:"Uploaded Success",
-    FILE_NOT_UPLOADED:"File Not Uploaded"
+    FILE_NOT_UPLOADED:"File Not Uploaded",
+    ADDRESS_UPLOADED:"Add data sccessfully"
 }
 export default MESSAGES

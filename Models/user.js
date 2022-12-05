@@ -2,10 +2,9 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 //import { boolean } from "joi";
-
+import address from "../Models/address.js";
 //soft delete
 const { softDeletePlugin } = require('soft-delete-plugin-mongoose');
-
 
 const userSchema = new Schema(
   {
@@ -26,12 +25,8 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
-    // delete:{
-    //   type:Boolean,
-    //   default:false
-    // }
   },
-  { timestamps: true }
+  { timestamps: true } //timestamps : save the current time of the document created
 );
 
 //soft delete
