@@ -38,31 +38,31 @@
   * #### USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
-* #### FILE_UPLOAD : POST API -- (127.0.0.1:3100/fileUpload)
- Single / Multifile uploaded 
- like : - jpg, jpeg, png, gif, pdf etc
+ * #### FILE_UPLOAD : POST API -- (127.0.0.1:3100/fileUpload)
+   Single / Multifile uploaded 
+   like : - jpg, jpeg, png, gif, pdf etc
 
 ## Package Explanation
 * ####  Express Framework:
- fast, assertive, essential and moderate web framework of Node.js
+  fast, assertive, essential and moderate web framework of Node.js
 
-*  #### Mongoose :
-Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
+* #### Mongoose :
+  Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 
-*  #### JWT Token :
-JSON Web Token (JWT) is a URL-safe  transferred between two parties.
+* #### JWT Token :
+  JSON Web Token (JWT) is a URL-safe  transferred between two parties.
 
 * #### bcrypt : 
-Allows building a password security platform
+  Allows building a password security platform
 
 * #### .env:
- Environment Variables
+  Environment Variables
 
 * #### soft-delete-plugin-mongoose : 
-soft delete documents and restore
+  soft delete documents and restore
 
-*  #### Middleware : 
-Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
+* #### Middleware : 
+  Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
 
 
 ## SetUp Development Environment
