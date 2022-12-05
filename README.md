@@ -38,10 +38,9 @@
   * #### USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
-
-* #### FILE_UPLOAD : POST API -- (127.0.0.1:3100/fileUpload)
- Single / Multifile uploaded 
- like : - jpg, jpeg, png, gif, pdf etc
+  * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
+    Single / Multifile uploaded 
+    like : - jpg, jpeg, png, gif, pdf etc
 
 ## Package Explanation
 * ####  Express Framework:
@@ -65,9 +64,7 @@ soft delete documents and restore
 *  #### Middleware : 
 Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
 
- * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
-   Single / Multifile uploaded 
-   like : - jpg, jpeg, png, gif, pdf etc
+
 
 ## Package Explanation
 * ####  Express Framework:
