@@ -18,7 +18,7 @@
 
 ## CRUD API Link & Working:
   * USER Register :POST API  --   (http://127.0.0.1:3100/register)
-    -- firstName: Required, text Limit 3 to 15 --
+    firstName: Required, text Limit 3 to 15 
     lastName: Optional, text Limit 3 to 15
     email: Required, text Limit 3 to 50 , Duplicate Validation
     password : Convert bcrypt, Limit 5 to 15
@@ -40,7 +40,7 @@
 
 
 ## Package Explanation
-* Express Framework: fast, assertive, essential and moderate web framework of Node.js
+* #####Express Framework: fast, assertive, essential and moderate web framework of Node.js
 
 * Mongoose :Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 
