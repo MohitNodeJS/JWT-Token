@@ -27,25 +27,25 @@
  * soft-delete-plugin-mongoose: "^1.0.15"
 
 ## CRUD API Link & Working:
-  * USER Register :POST API --   ( http://127.0.0.1:3100/register)
+  * USER Register :POST API --   (http://127.0.0.1:3100/register)
     firstName: Required, text Limit 3 to 15 
     lastName: Optional, text Limit 3 to 15
     email: Required, text Limit 3 to 50 , Duplicate Validation
     password : Convert bcrypt, Limit 5 to 15
 
-  * USER LOGIN : POST API -- ( http://127.0.0.1:3100/login )
+  * USER LOGIN : POST API -- (http://127.0.0.1:3100/login)
     Email & Password are required  
     then generate a token ( Token Expiry time : 30 minute)
 
-  * USER DETAILS UPDATE : PUT API -- http://127.0.0.1:3100/profile 
+  * USER DETAILS UPDATE : PUT API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User
     Body/JSON : Modify details user
 
-  * USER DELETE : POST API --  http://127.0.0.1:3100/delete
+  * USER DELETE : POST API --  (http://127.0.0.1:3100/delete)
     Auth/Bearer : Add Token User
     Its a soft delete not a pemanent delete
 
-  * USER PROFILE : GET API -- http://127.0.0.1:3100/profile
+  * USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
 
