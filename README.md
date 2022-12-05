@@ -38,7 +38,7 @@
   * #### USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
- * #### FILE_UPLOAD : POST API -- (127.0.0.1:3100/fileUpload)
+ * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
    Single / Multifile uploaded 
    like : - jpg, jpeg, png, gif, pdf etc
 
