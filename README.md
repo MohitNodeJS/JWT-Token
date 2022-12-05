@@ -1,9 +1,9 @@
 # CRUD Using JWT-Token, express-validation, 
 
 ## Project Run Command
->> npm i
+*npm i
 
->> npm start
+*npm start
 
 ## Package Version:
   node : v16.17.1
