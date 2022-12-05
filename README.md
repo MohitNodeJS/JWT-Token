@@ -33,7 +33,7 @@
     email: Required, text Limit 3 to 50 , Duplicate Validation
     password : Convert bcrypt, Limit 5 to 15
 
-  ** USER LOGIN : POST API -- (http://127.0.0.1:3100/login)
+  * USER LOGIN : POST API -- (http://127.0.0.1:3100/login)
     Email & Password are required  
     then generate a token ( Token Expiry time : 30 minute)
 
@@ -67,20 +67,12 @@
 
 ## SetUp Development Environment
   * npm init
-  
   * npm i express
-  
   * npm i mongoose
-  
   * npm i jsonwebtoken
-  
   * npm i joi
-  
   * npm i esm
-  
   * npm i dotenv
-  
   * npm i bcryptjs
-  
   * npm i soft-delete-plugin-mongoose
   
