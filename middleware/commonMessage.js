@@ -16,6 +16,8 @@ const MESSAGES={
     UPDATED_ERROR:"error",
     LOGIN_DELETE:"Not Login: Because User Data  Deleted on DB ",
     SERVER_ERROR:"Something went wrong, Please try agian",
-    EMAIL__SUCCESS:"Successfully Uploaded"
+    EMAIL__SUCCESS:"Successfully Uploaded",
+    FILE_UPLOADED:"Uploaded Success",
+    FILE_NOT_UPLOADED:"File Not Uploaded"
 }
 export default MESSAGES

@@ -29,3 +29,33 @@ PUT:  127.0.0.1:3100/profile
 
 
 
+>> service control helper
+with validation
+
+
+
+///--------------------
+USer details table 
+
+
+//multerServices
+  multerServices(req, res) {
+   
+    try {
+      let resPayload = {
+        message: MESSAGES.IMAGE_UPLOADED,
+        // payload: user,
+      };
+      Response.success(res, resPayload);
+      //res.send(req.files);
+    } catch (error) {
+      let resPayload = {
+        message: "",
+        // payload: user,
+      };
+      Response.error(res, resPayload);
+      // res.json({
+      //   error,
+      // });
+    }
+  }

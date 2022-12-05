@@ -3,6 +3,8 @@ import Response from "../helpers/responseHelper.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../middleware/commonMessage.js";
+// import uploadImage from "../helpers/multerHelper";
+// import e, { response } from "express";
 
 class userServices {
   //Register User
@@ -170,15 +172,5 @@ class userServices {
     }
   }
 
-  //multer
-  // multer(req,res){
-  //   try {
-  //     res.send(req.files)
-  //   } catch (error) {
-  //     res.json({
-  //       error,
-  //     });
-  //   }
-  // }
 }
 export default new userServices();

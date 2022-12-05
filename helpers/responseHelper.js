@@ -16,7 +16,7 @@ class Response {
        //message: data.message,
       payload: data.payload,
     };
-    
+     
     return res.status(statusCode).send(resPayload);
   }
 }

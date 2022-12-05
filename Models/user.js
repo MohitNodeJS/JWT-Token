@@ -40,7 +40,7 @@ userSchema.plugin(softDeletePlugin);
 //save case password bcrypt
 userSchema.pre("save", async function (next) {
   try {
-    const salt = await bcrypt.genSalt(12);
+    //const salt = await bcrypt.genSalt(12);
     const passwordhash = await bcrypt.hash(this.password, 10);//10 :salt value
     this.password = passwordhash;
     next();
