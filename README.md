@@ -1,4 +1,4 @@
-#  -- CRUD Using JWT-Token, express-validation -- , 
+# CRUD Using JWT-Token, express-validation , 
 
 ## Project Run Command
 * npm i
