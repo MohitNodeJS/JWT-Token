@@ -56,13 +56,13 @@ JSON Web Token (JWT) is a URL-safe  transferred between two parties.
 Allows building a password security platform
 
 * #### .env:
- Environment Variables
+  Environment Variables
 
 * #### soft-delete-plugin-mongoose : 
 soft delete documents and restore
 
-*  #### Middleware : 
-Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
+* #### Middleware : 
+  Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
 
 
 
