@@ -22,7 +22,8 @@ const multerFilter = (req, file, cb) => {
   ) {
     cb(null, true);
   } else {
-    cb(new Error("invalid"), false);
+    //cb(new Error("invalid"), false);
+    cb(null, false);
     //const err = new Error("Only .png, .jpg and .jpeg format allowed!");
     //err.name = "ExtensionError";
     //return cb(err);

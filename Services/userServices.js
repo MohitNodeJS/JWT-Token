@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../helpers/commonMessage.js";
 import uploadImage from "../helpers/multerHelper";
+import address from "../Models/address.js";
 
 class userServices {
   //Register User
@@ -24,7 +25,6 @@ class userServices {
         message: MESSAGES.EMAIL__SUCCESS,
       };
       return Response.success(res, resPayload);
-
     } catch (err) {
       let resPayload = {
         message: err.message,
@@ -81,7 +81,14 @@ class userServices {
   async updateById(req, res) {
     try {
       const ExtUser = await _user.findOne({ email: req.body.email });
-      //EMail allready used 
+      // console.log(ExtUser);
+      // if(ExtUser.email){
+      //   let resPayload = {
+      //     message: "Old Email",
+      //   };
+      //   return Response.success(res, resPayload);
+      // }
+      //EMail allready used
       if (ExtUser) {
         let resPayload = {
           message: MESSAGES.EMAIL,
@@ -94,8 +101,10 @@ class userServices {
       const user = await _user
         .findByIdAndUpdate(updateId, req.body)
         .select("firstName lastName email");
+
       let resPayload = {
         message: MESSAGES.UPDATED_SUCCESS,
+        payload: user,
       };
       return Response.success(res, resPayload);
     } catch (err) {
@@ -144,14 +153,30 @@ class userServices {
     try {
       //User Profile Details
       const idUser = req.user._id;
-      const user = await _user
-        .findById(idUser)
-        .select("firstName lastName email address");
+      // const user = await _user
+      //   .findById(idUser)
+      //   .select("firstName lastName email address");
+
+      const user = await _user.findById(idUser);
+      const addressDetails = {
+        HouseNo: user.address.houseNo,
+        City: user.address.city,
+        State: user.address.state,
+        PinCode: user.address.pincode,
+        Country: user.address.country,
+      };
+      const displayData = {
+        FirstName: user.firstName,
+        LastName: user.lastName,
+        Email: user.email,
+        Address: addressDetails,
+      };
+
       let resPayload = {
         message: MESSAGES.PROFILE,
-        payload: user,
+        payload: displayData,
       };
-      Response.success(res, resPayload);
+      return Response.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: err.message,
@@ -163,29 +188,28 @@ class userServices {
 
   //multer file upload
   async multer(req, res) {
-   try{
-    //upload Image
-    await uploadImage(req, res, (err) => {
-
-      //File Not Uploaded
-      if (err) {
-        res.status(500).send({
-          message: MESSAGES.FILE_NOT_UPLOADED,
-        });
-      } else {
-        //File Uploaded
-        res.status(200).send({
-          message: MESSAGES.FILE_UPLOADED,
-        });
-      }
-    });
-   }catch(err){
-    let resPayload = {
-      message: err.message,
-      payload: {},
-    };
-    return Response.error(res, resPayload);
-  }
+    try {
+      //upload Image
+      await uploadImage(req, res, (err) => {
+        //File Not Uploaded
+        if (err) {
+          res.status(500).send({
+            message: MESSAGES.FILE_NOT_UPLOADED,
+          });
+        } else {
+          //File Uploaded
+          res.status(200).send({
+            message: MESSAGES.FILE_UPLOADED,
+          });
+        }
+      });
+    } catch (err) {
+      let resPayload = {
+        message: err.message,
+        payload: {},
+      };
+      return Response.error(res, resPayload);
+    }
   }
 }
 export default new userServices();
