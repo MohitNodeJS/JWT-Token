@@ -49,17 +49,17 @@
 *  #### Mongoose :
 Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 
-*  #### JWT Token :
-JSON Web Token (JWT) is a URL-safe  transferred between two parties.
+* #### JWT Token :
+  JSON Web Token (JWT) is a URL-safe  transferred between two parties.
 
 * #### bcrypt : 
-Allows building a password security platform
+  Allows building a password security platform
 
 * #### .env:
   Environment Variables
 
 * #### soft-delete-plugin-mongoose : 
-soft delete documents and restore
+  soft delete documents and restore
 
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
@@ -68,7 +68,7 @@ soft delete documents and restore
 
 ## Package Explanation
 * ####  Express Framework:
-  fast, assertive, essential and moderate web framework of Node.js
+  Fast, assertive, essential and moderate web framework of Node.js
 
 * #### Mongoose :
   Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
@@ -83,7 +83,7 @@ soft delete documents and restore
   Environment Variables
 
 * #### soft-delete-plugin-mongoose : 
-  soft delete documents and restore
+  Soft delete documents and restore
 
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
