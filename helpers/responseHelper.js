@@ -1,4 +1,4 @@
-import MESSAGES from "../middleware/commonMessage";
+import MESSAGES from "../helpers/commonMessage.js";
 
 class Response {
   success(res, data, statuscode = 200) {

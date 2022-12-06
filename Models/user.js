@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-//import { boolean } from "joi";
-import address from "../Models/address.js";
+//import { boolean } from "joi"
+import {addressSchema} from "../Models/address"
 //soft delete
 const { softDeletePlugin } = require('soft-delete-plugin-mongoose');
 
@@ -25,8 +25,9 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    address:addressSchema,
   },
-  { timestamps: true } //timestamps : save the current time of the document created
+  { timestamps: true }, //timestamps : save the current time of the document created
 );
 
 //soft delete

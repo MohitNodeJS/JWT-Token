@@ -1,6 +1,6 @@
 import validationHelper from "../helpers/validationHelper.js";
 import ResponseHelper from "../helpers/responseHelper.js";
-import MESSAGES from "./commonMessage.js";
+import MESSAGES from "../helpers/commonMessage.js";
 class JoiMainMiddleware{
      JoiMiddleware  (req,res,next) {
         // to get method from request------------tolowercase

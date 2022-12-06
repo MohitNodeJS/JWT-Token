@@ -4,7 +4,7 @@ const MESSAGES={
     LOGIN_PASSWORD_IN_CORRECT: 'Incorrect Password', //d
     PROFILE:"Profile Information",//d
     UPDATED_SUCCESS:"successfully updated data",//D
-    UPDATED_ERROR:"Invalid Credentials While Update",//d
+    //UPDATED_ERROR:"Invalid Credentials While Update",//d
     EMAIL: " EMail allready used",
     REGISTER_SUCCESS:"Successfully Register",//D
     REGISTER_ERROR:"Attention: Email Allready Used",//D

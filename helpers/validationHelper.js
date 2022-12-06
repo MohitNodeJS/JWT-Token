@@ -39,13 +39,15 @@ const userSchema = joi.object({
 
   //address
   address: joi.object({
-    houseNo: joi.string().min(3).max(15).optional(),
+    houseNo: joi.string().max(15).optional(),
     city: joi.string().max(15).optional(),
     state: joi.string().max(15).optional(),
     pincode: joi.string().max(15).optional(),
     country: joi.string().max(15).optional(),
   }),
 });
+
+
 
 //login schema
 const userSchemaLogin = joi.object({
@@ -58,6 +60,13 @@ const userSchemaUpd = joi.object({
   lastName: joi.string().min(3).max(15).required().optional(),
   email: joi.string().email().min(5).max(50).required().optional(),
   password: joi.string().min(5).max(15).required().optional(),
+  address: joi.object({
+    houseNo: joi.string().max(15).optional(),
+    city: joi.string().max(15).optional(),
+    state: joi.string().max(15).optional(),
+    pincode: joi.string().max(15).optional(),
+    country: joi.string().max(15).optional(),
+  }),
 });
 
 
