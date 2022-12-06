@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-//import { boolean } from "joi"
 import {addressSchema} from "../Models/address"
+
 //soft delete
 const { softDeletePlugin } = require('soft-delete-plugin-mongoose');
 

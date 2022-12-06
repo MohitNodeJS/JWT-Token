@@ -1,6 +1,4 @@
-//import { Router } from "express";
 import joi from "joi";
-//import address from "../Models/address";
 const validationHelper = (route, method) => {
   let obj = {};
   switch (method) {
@@ -27,7 +25,6 @@ const validationHelper = (route, method) => {
     default:
   }
 };
-
 export default validationHelper;
 
 //put , Register
@@ -46,8 +43,6 @@ const userSchema = joi.object({
     country: joi.string().max(15).optional(),
   }),
 });
-
-
 
 //login schema
 const userSchemaLogin = joi.object({

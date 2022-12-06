@@ -1,10 +1,7 @@
 import userServices from "../Services/userServices.js";
 import JoiMainMiddleware from "../middleware/joiMiddleware.js";
 import authValidaton from "../middleware/authMiddleware.js";
-//mport multer from "multer";
-//import uploadImage from "../helpers/multerHelper";
-//import MESSAGES from "../middleware/commonMessage.js";
-//import addressService from "../Services/addressService.js";
+//import { uploadImage} from "../helpers/multerHelper.js";
 
 const Route = (app) => {
   // app.post("/register", JoiMainMiddleware.JoiMiddleware, userServices.register);
@@ -19,6 +16,7 @@ const Route = (app) => {
   app.post("/delete", authValidaton, userServices.softDelete);
 
   //Multer file uploded
+  
   app.post("/fileUpload",userServices.multer);
   // app.post("/fileUpload", (req, res, next) => {
   //   uploadImage(req, res, (err) => {

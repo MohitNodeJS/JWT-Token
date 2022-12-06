@@ -6,7 +6,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config();//read .env file
 
 import mongoose from "mongoose";
 import Route from "./Router/route.js";

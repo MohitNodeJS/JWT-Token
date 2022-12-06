@@ -1,8 +1,8 @@
 # CRUD Using JWT-Token, express-validation , 
 
 ## Project Run Command
-* npm i
-* npm start
+* `npm i`
+* `npm start`
 
 ## Package Version:
  * node : v16.17.1
@@ -38,33 +38,6 @@
   * #### USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
-<<<<<<< HEAD
-* #### FILE_UPLOAD : POST API -- (127.0.0.1:3100/fileUpload)
- Single / Multifile uploaded 
- like : - jpg, jpeg, png, gif, pdf etc
-
-## Package Explanation
-* ####  Express Framework:
- fast, assertive, essential and moderate web framework of Node.js
-
-*  #### Mongoose :
-Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
-
-*  #### JWT Token :
-JSON Web Token (JWT) is a URL-safe  transferred between two parties.
-
-* #### bcrypt : 
-Allows building a password security platform
-
-* #### .env:
- Environment Variables
-
-* #### soft-delete-plugin-mongoose : 
-soft delete documents and restore
-
-*  #### Middleware : 
-Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
-=======
  * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
    Single / Multifile uploaded 
    like : - jpg, jpeg, png, gif, pdf etc
@@ -90,7 +63,6 @@ Express.js is a routing and Middleware framework for handling the different rout
 
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
->>>>>>> 4f92909a61b22f32219d6ec6c719e2332b9cf599
 
 
 ## SetUp Development Environment

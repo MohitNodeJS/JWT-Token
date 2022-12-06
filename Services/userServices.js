@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../helpers/commonMessage.js";
 import uploadImage from "../helpers/multerHelper";
-import address from "../Models/address.js";
+//import address from "../Models/address.js";
 
 class userServices {
   //Register User
@@ -80,14 +80,8 @@ class userServices {
   // Update user
   async updateById(req, res) {
     try {
-      const ExtUser = await _user.findOne({ email: req.body.email });
-      // console.log(ExtUser);
-      // if(ExtUser.email){
-      //   let resPayload = {
-      //     message: "Old Email",
-      //   };
-      //   return Response.success(res, resPayload);
-      // }
+      //const ExtUser = await _user.findOne({ email: req.body.email });
+      const ExtUser = await _user.findOne({ email: req.body.email,_id:{$ne:req.user._id}}).lean();//$ne check user email
       //EMail allready used
       if (ExtUser) {
         let resPayload = {
@@ -95,9 +89,10 @@ class userServices {
         };
         return Response.success(res, resPayload);
       }
-
+     
       //Successfully updated data
       const updateId = req.user._id;
+      
       const user = await _user
         .findByIdAndUpdate(updateId, req.body)
         .select("firstName lastName email");
@@ -211,5 +206,7 @@ class userServices {
       return Response.error(res, resPayload);
     }
   }
+
+  
 }
 export default new userServices();

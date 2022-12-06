@@ -9,7 +9,7 @@ class JoiMainMiddleware{
         // to get route from request
     
         let schema = validationHelper(route,method);
-        const{error}=schema.validate(req.body,{abortEarly:false});
+        const{error}=schema.validate(req.body,{abortEarly:false});//const {error} destuchering
         if(error){    
           let errors = error.details.map((curr)=>{
             let o ={};
