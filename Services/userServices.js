@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../helpers/commonMessage.js";
 import uploadImage from "../helpers/multerHelper";
-//import address from "../Models/address.js";
+import address from "../Models/address.js";
+import Quote from "../Models/quotes.js";
 
 class userServices {
   //Register User
@@ -80,19 +81,19 @@ class userServices {
   // Update user
   async updateById(req, res) {
     try {
-      //const ExtUser = await _user.findOne({ email: req.body.email });
-      const ExtUser = await _user.findOne({ email: req.body.email,_id:{$ne:req.user._id}}).lean();//$ne check user email
+      const idUser = req.user._id;
+      const ExtUser = await _user.findOne({ email: req.body.email });
+
       //EMail allready used
-      if (ExtUser) {
+      if (ExtUser.id != idUser) {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
         return Response.success(res, resPayload);
       }
-     
+
       //Successfully updated data
       const updateId = req.user._id;
-      
       const user = await _user
         .findByIdAndUpdate(updateId, req.body)
         .select("firstName lastName email");
@@ -207,6 +208,75 @@ class userServices {
     }
   }
 
-  
+  //
+  async addquotes(req, res) {
+    try {
+      const idUser = req.user._id;
+      //onsole.log(idUser)
+      let attribute = {
+        title: req.body.title,
+        by: req.body.by,
+        userId: idUser,
+      };
+      let myQuotes = new Quote(attribute);
+
+      myQuotes
+        .save()
+        .then((value) => {
+          let resPayload = {
+            message: MESSAGES.QUOTES_SUCCESS,
+            payload: value.title,
+          };
+          return Response.success(res, resPayload);
+        })
+        .catch((err) => {
+          let resPayload = {
+            message: err,
+            payload: {},
+          };
+          return Response.error(res, resPayload);
+        });
+    } catch (err) {
+      let resPayload = {
+        message: MESSAGES.SERVER_ERROR,
+        payload: {},
+      };
+      return Response.error(res, resPayload, 500);
+    }
+  }
+
+  async userQuots(req, res) {
+    try{
+        const idUser = req.user._id;
+        const user = await _user.findById(idUser)
+        //console.log(user._id)
+
+
+        const findQuotes =await Quote.findOne({userId:user._id})
+        
+           const  fQuotes={
+                title:findQuotes.title,
+                by:findQuotes.by
+            }
+console.log(fQuotes);
+        const finalUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            qoutes:fQuotes
+        }
+        let resPayload = {
+            message: MESSAGES.PROFILE,
+            payload: finalUser
+        };
+        Response.success(res, resPayload)
+    } catch (err) {
+        let resPayload = {
+            message: MESSAGES.SERVER_ERROR,
+            payload: {}
+        };
+        return Response.error(res, resPayload, 500)
+    }
+}
 }
 export default new userServices();

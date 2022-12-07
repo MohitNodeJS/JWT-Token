@@ -19,6 +19,7 @@ const MESSAGES={
     EMAIL__SUCCESS:"Successfully Uploaded",
     FILE_UPLOADED:"Uploaded Success",
     FILE_NOT_UPLOADED:"File Not Uploaded",
-    ADDRESS_UPLOADED:"Add data sccessfully"
+    ADDRESS_UPLOADED:"Add data sccessfully",
+    QUOTES_SUCCESS:"Quotes_Success"
 }
 export default MESSAGES

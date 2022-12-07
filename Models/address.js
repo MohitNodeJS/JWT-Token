@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
-//export & import user table
 export const addressSchema = new Schema(
     {
         houseNo: {
