@@ -1,5 +1,6 @@
 import MESSAGES from "../helpers/commonMessage.js";
 
+//predefined strcture
 class Response {
   success(res, data, statuscode = 200) {
     let resPayload = {

@@ -23,6 +23,7 @@ const validationHelper = (route, method) => {
         "/register": userSchema,
         "/login": userSchemaLogin,
         "/quotesRegister":quotesSchema
+       
       };
       return obj[route];
     default:
@@ -59,7 +60,7 @@ const userSchemaLogin = joi.object({
 const userSchemaUpd = joi.object({
   firstName: joi.string().min(3).max(15).required().optional(),
   lastName: joi.string().min(3).max(15).required().optional(),
-  email: joi.string().email().min(5).max(50).required().optional(),
+  email: joi.string().email().min(5).max(50).optional(),
   password: joi.string().min(5).max(15).required().optional(),
   address: joi.object({
     houseNo: joi.string().max(15).optional(),
@@ -70,8 +71,8 @@ const userSchemaUpd = joi.object({
   }),
 });
 const quotesSchema=joi.object({
-  title: joi.string().min(3).max(15).optional(),
-  by:joi.string().min(3).max(15).optional(),
+  title: joi.string().min(3).max(15).required(),
+  by:joi.string().min(3).max(15).required(),
 })
 
 

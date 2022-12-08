@@ -5,6 +5,17 @@ git branch
   git push
 
 
+aggregate
+[
+  {
+    '$lookup': {
+      'from': 'quotes', 
+      'localField': '_id', 
+      'foreignField': 'userId', 
+      'as': 'result'
+    }
+  }
+]
 
 //Register
 POST: 127.0.0.1:3100/register

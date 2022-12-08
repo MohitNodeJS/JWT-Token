@@ -35,7 +35,7 @@ class userServices {
     }
   }
 
-  //Login
+  //Login user
   async login(req, res) {
     try {
       const ExtUser = await _user.findOne({ email: req.body.email });
@@ -82,10 +82,12 @@ class userServices {
   async updateById(req, res) {
     try {
       const idUser = req.user._id;
-      const ExtUser = await _user.findOne({ email: req.body.email });
+      const ExtUser = await _user
+        .findOne({ email: req.body.email, _id: { $ne: idUser } })
+        .lean();
 
       //EMail allready used
-      if (ExtUser.id != idUser) {
+      if (ExtUser) {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
@@ -208,8 +210,8 @@ class userServices {
     }
   }
 
-  //Add Quotes 
-  async addquotes(req, res) {
+  //Add Quotes
+  async addQuotes(req, res) {
     try {
       const idUser = req.user._id;
       //onsole.log(idUser)
@@ -245,23 +247,33 @@ class userServices {
     }
   }
 
-
   //Quotes Details With user
-  async userQuots(req, res) {
+  async userQuotes(req, res) {
     try {
       const idUser = req.user._id;
-      const user = await _user.findById(idUser);
+      const user = await _user.findById(idUser, { firstName: 1 });
 
-      const findQuote = await Quote.find({ userId: user._id });
+      const findQuotes = await Quote.find(
+        { userId: user._id },
+        {
+          title: 1, //projection title :true displaying
+          _id: 0, //projection title :false not displaying
+          // by:1,
+          //_id: 0 ,userId:0,createdAt:0,updatedAt:0,__v:0// projection code
+        }
+      );
 
-      let findQuotes = findQuote.map((value) => {
-        return { title: value.title, by: value.by };
-      });
+      //const findQuote = await Quote.find({ userId: user._id });
+      // let findQuotes = findQuote.map((value) => {
+      //   return { title: value.title, by: value.by };
+      // });
+
       const finalUser = {
-        Name: user.firstName,
+        Created_By: user.firstName,
         //lastName: user.lastName,
-        Email: user.email,
+        //Email: user.email,
         Qoutes: findQuotes,
+        //by:user
       };
       let resPayload = {
         message: MESSAGES.PROFILE,
@@ -276,5 +288,46 @@ class userServices {
       return Response.error(res, resPayload, 500);
     }
   }
+
+  //aggregate : find all user data
+  async totalUserWithQuotes(req, res) {
+    try {
+      //const idUser = req.user._id;
+      //const user = await _user.findById(idUser);
+      let allUserQuotes = await _user.aggregate([
+        {
+          $lookup: {
+            from: "quotes",
+            localField: "_id",
+            foreignField: "userId",
+            as: "Quotes",
+          },
+        },
+        {
+          '$project': {
+              '_id':0,
+              'firstName': 1, 
+              'Quotes': {
+                  'title': 1
+              }
+          }
+      },
+      
+      ]);
+      //return res.send(allUserQuotes)
+      let resPayload = {
+        message: MESSAGES.PROFILE,
+        payload: allUserQuotes,
+      };
+      Response.success(res, resPayload);
+    } catch (err) {
+      let resPayload = {
+        message: MESSAGES.SERVER_ERROR,
+        payload: {},
+      };
+      return Response.error(res, resPayload, 500);
+    }
+  }
 }
+
 export default new userServices();

@@ -7,7 +7,6 @@ import authValidaton from "../middleware/authMiddleware.js";
 //import addressService from "../Services/addressService.js";
 
 const Route = (app) => {
-  // app.post("/register", JoiMainMiddleware.JoiMiddleware, userServices.register);
   app.post("/register", JoiMainMiddleware.JoiMiddleware, userServices.register);
   app.post("/login", JoiMainMiddleware.JoiMiddleware, userServices.login);
   app.get("/profile", authValidaton, userServices.myprofile);
@@ -19,15 +18,21 @@ const Route = (app) => {
   app.post("/delete", authValidaton, userServices.softDelete);
 
   //Multer file uploded
-  app.post("/fileUpload",userServices.multer);
- 
+  app.post("/fileUpload", userServices.multer);
 
-  // quotes
-  app.post("/quotesRegister",authValidaton,userServices.addquotes);
+  // add quotes
+  app.post(
+    "/quotesRegister",
+    [authValidaton, JoiMainMiddleware.JoiMiddleware],
+    userServices.addQuotes
+  );
 
+  // Details quotes
+  app.get("/quotesDetails", authValidaton, userServices.userQuotes);
 
-  app.get("/quotesDetails",authValidaton,userServices.userQuots);
-  
+  //aggregate
+  app.get("/allUserQuotesDetails", userServices.totalUserWithQuotes);
+
 };
 
 export default Route;
