@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../helpers/commonMessage.js";
 import uploadImage from "../helpers/multerHelper";
-import address from "../Models/address.js";
+//import address from "../Models/address.js";
 import Quote from "../Models/quotes.js";
 
 class userServices {
@@ -208,7 +208,7 @@ class userServices {
     }
   }
 
-  //
+  //Add Quotes 
   async addquotes(req, res) {
     try {
       const idUser = req.user._id;
@@ -245,38 +245,36 @@ class userServices {
     }
   }
 
+
+  //Quotes Details With user
   async userQuots(req, res) {
-    try{
-        const idUser = req.user._id;
-        const user = await _user.findById(idUser)
-        //console.log(user._id)
+    try {
+      const idUser = req.user._id;
+      const user = await _user.findById(idUser);
 
+      const findQuote = await Quote.find({ userId: user._id });
 
-        const findQuotes =await Quote.findOne({userId:user._id})
-        
-           const  fQuotes={
-                title:findQuotes.title,
-                by:findQuotes.by
-            }
-console.log(fQuotes);
-        const finalUser = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            qoutes:fQuotes
-        }
-        let resPayload = {
-            message: MESSAGES.PROFILE,
-            payload: finalUser
-        };
-        Response.success(res, resPayload)
+      let findQuotes = findQuote.map((value) => {
+        return { title: value.title, by: value.by };
+      });
+      const finalUser = {
+        Name: user.firstName,
+        //lastName: user.lastName,
+        Email: user.email,
+        Qoutes: findQuotes,
+      };
+      let resPayload = {
+        message: MESSAGES.PROFILE,
+        payload: finalUser,
+      };
+      Response.success(res, resPayload);
     } catch (err) {
-        let resPayload = {
-            message: MESSAGES.SERVER_ERROR,
-            payload: {}
-        };
-        return Response.error(res, resPayload, 500)
+      let resPayload = {
+        message: MESSAGES.SERVER_ERROR,
+        payload: {},
+      };
+      return Response.error(res, resPayload, 500);
     }
-}
+  }
 }
 export default new userServices();

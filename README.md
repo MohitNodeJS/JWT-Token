@@ -48,6 +48,12 @@
     like : - jpg, jpeg, png, gif, pdf etc
 >>>>>>> a2158b047b80d87d7f194d13b9bf3f341228d723
 
+* #### ADD QUOTES : POST API -- (http://127.0.0.1:3100/quotesRegister)
+    Auth/Bearer : Add Token User // Add title & by info
+
+* #### QUOTES DETAILS : GET API -- (http://127.0.0.1:3100/quotesDetails)
+    Auth/Bearer : Add Token User // Display Name,Email,Quotes [ Title, By ]
+
 ## Package Explanation
 * ####  Express Framework:
   fast, assertive, essential and moderate web framework of Node.js
