@@ -38,15 +38,10 @@
   * #### USER PROFILE : GET API -- (http://127.0.0.1:3100/profile)
     Auth/Bearer : Add Token User // Show users all details
 
-<<<<<<< HEAD
  * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
    Single / Multifile uploaded 
    like : - jpg, jpeg, png, gif, pdf etc
-=======
-  * #### FILE_UPLOAD : POST API -- (http://127.0.0.1:3100/fileUpload)
-    Single / Multifile uploaded 
-    like : - jpg, jpeg, png, gif, pdf etc
->>>>>>> a2158b047b80d87d7f194d13b9bf3f341228d723
+ 
 
 * #### ADD QUOTES : POST API -- (http://127.0.0.1:3100/quotesRegister)
     Auth/Bearer : Add Token User // Add title & by info
@@ -75,9 +70,6 @@
 
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
-<<<<<<< HEAD
-=======
-
 
 
 ## Package Explanation
@@ -101,7 +93,7 @@
 
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
->>>>>>> a2158b047b80d87d7f194d13b9bf3f341228d723
+
 
 
 ## SetUp Development Environment
