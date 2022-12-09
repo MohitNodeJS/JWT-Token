@@ -1,10 +1,6 @@
 import userServices from "../Services/userServices.js";
 import JoiMainMiddleware from "../middleware/joiMiddleware.js";
 import authValidaton from "../middleware/authMiddleware.js";
-//mport multer from "multer";
-//import uploadImage from "../helpers/multerHelper";
-//import MESSAGES from "../middleware/commonMessage.js";
-//import addressService from "../Services/addressService.js";
 
 const Route = (app) => {
   app.post("/register", JoiMainMiddleware.JoiMiddleware, userServices.register);
@@ -30,9 +26,11 @@ const Route = (app) => {
   // Details quotes
   app.get("/quotesDetails", authValidaton, userServices.userQuotes);
 
-  //aggregate
+  //aggregate: all user without token
   app.get("/allUserQuotesDetails", userServices.totalUserWithQuotes);
 
+  //aggregate: single user with token
+  app.get("/getAggregationQuotes",authValidaton, userServices. getAggregationQuotes);
 };
 
 export default Route;

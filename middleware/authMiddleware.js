@@ -4,7 +4,6 @@ import  jwt  from "jsonwebtoken";
 import dotenv from 'dotenv'
 dotenv.config()
 
-
 const authValidaton =(req,res,next)=>{
     const header =req.headers.authorization;
     const token = header.replace("Bearer ","")
@@ -12,7 +11,6 @@ const authValidaton =(req,res,next)=>{
     try{
         //const decoded= jwt.verify(token, 'mytoken')
         const decoded= jwt.verify(token, process.env.MY_TOKEN)
-
         req.user=decoded
     }
     catch(err){

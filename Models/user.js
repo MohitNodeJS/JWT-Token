@@ -1,16 +1,21 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-//import { boolean } from "joi"
-import {addressSchema} from "../Models/address"
+import { addressSchema } from "../Models/address";
+import { nanoid } from "nanoid";
+
 //soft delete
-const { softDeletePlugin } = require('soft-delete-plugin-mongoose');
+const { softDeletePlugin } = require("soft-delete-plugin-mongoose");
 
 const userSchema = new Schema(
   {
+    _id: {
+      type: String,
+      default: () => nanoid(),
+    },
     firstName: {
       type: String,
-      required:false,
+      required: false,
     },
     lastName: {
       type: String,
@@ -25,9 +30,9 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
-    address:addressSchema,
+    address: addressSchema,
   },
-  { timestamps: true }, //timestamps : save the current time of the document created
+  { timestamps: true } //timestamps : save the current time of the document created
 );
 
 //soft delete
@@ -37,7 +42,7 @@ userSchema.plugin(softDeletePlugin);
 userSchema.pre("save", async function (next) {
   try {
     //const salt = await bcrypt.genSalt(12);
-    const passwordhash = await bcrypt.hash(this.password, 10);//10 :salt value
+    const passwordhash = await bcrypt.hash(this.password, 10); //10 :salt value
     this.password = passwordhash;
     next();
   } catch {
@@ -52,11 +57,9 @@ userSchema.pre("findOneAndUpdate", async function (next) {
       const passwordhash = await bcrypt.hash(this._update.password, 10);
       this._update.password = passwordhash;
     }
-     next();
-  }
-  catch {
-   return  next(error)
-
+    next();
+  } catch {
+    return next(error);
   }
 });
 

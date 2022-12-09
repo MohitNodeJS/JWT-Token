@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 export const addressSchema = new Schema(
     {
+        _id:false,
         houseNo: {
             type: String,
             required: false,
@@ -25,5 +26,5 @@ export const addressSchema = new Schema(
     },
     { timestamps: true }  //timestamps : save the current time of the document created
   );
-  let address = mongoose.model("address", addressSchema);
-  export default address;
+  // let address = mongoose.model("address", addressSchema);
+  // export default address;

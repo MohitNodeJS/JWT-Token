@@ -36,5 +36,5 @@ const uploadImage = multer({
   limits: { fileSize: 1 * 1024 * 1024 },
 }).any("profile", 10); //profile its a field name & how many upload one time
 
-//let uploadImage = util.promisify(uploadfile);
+
 export default uploadImage;

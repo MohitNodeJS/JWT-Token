@@ -1,18 +1,27 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import _user from "./user";
+import { nanoid } from "nanoid";
+
 const quotesSchema = new Schema(
   {
+    _id: {
+      type: String,
+      default: () => nanoid(),
+    },
     title: {
       type: String,
       required: false,
     },
-    by:{
+    by: {
       type: String,
       required: false,
     },
- 
-    userId:{type:Schema.Types.ObjectId,ref: 'users'}
+
+    userId: {
+      type: String,
+      ref: "users",
+    },
     //address:addressSchema,
   },
   { timestamps: true } //timestamps : save the current time of the document created

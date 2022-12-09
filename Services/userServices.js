@@ -1,10 +1,9 @@
-import _user from "../Models/user.js";
+import userModel from "../Models/user.js";
 import Response from "../helpers/responseHelper.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import MESSAGES from "../helpers/commonMessage.js";
 import uploadImage from "../helpers/multerHelper";
-//import address from "../Models/address.js";
 import Quote from "../Models/quotes.js";
 
 class userServices {
@@ -12,7 +11,7 @@ class userServices {
   async register(req, res) {
     try {
       //email validation check
-      let email = await _user.findOne({ email: req.body.email });
+      let email = await userModel.findOne({ email: req.body.email });
       if (email) {
         let resPayload = {
           message: MESSAGES.EMAIL,
@@ -20,7 +19,7 @@ class userServices {
         return Response.success(res, resPayload);
       }
       //save data
-      let myUser = new _user(req.body);
+      let myUser = new userModel(req.body);
       myUser.save();
       let resPayload = {
         message: MESSAGES.EMAIL__SUCCESS,
@@ -38,11 +37,11 @@ class userServices {
   //Login user
   async login(req, res) {
     try {
-      const ExtUser = await _user.findOne({ email: req.body.email });
+      const ExtUser = await userModel.findOne({ email: req.body.email });
       //user account deleted
       if (ExtUser.isDeleted == true) {
         let resPayload = {
-          message: MESSAGES.LOGIN_USER_DELECTED,
+          message: MESSAGES.LOGINuserModel_DELECTED,
         };
         return Response.error(res, resPayload);
       } else {
@@ -82,7 +81,7 @@ class userServices {
   async updateById(req, res) {
     try {
       const idUser = req.user._id;
-      const ExtUser = await _user
+      const ExtUser = await userModel
         .findOne({ email: req.body.email, _id: { $ne: idUser } })
         .lean();
 
@@ -96,7 +95,7 @@ class userServices {
 
       //Successfully updated data
       const updateId = req.user._id;
-      const user = await _user
+      const user = await userModel
         .findByIdAndUpdate(updateId, req.body)
         .select("firstName lastName email");
 
@@ -117,7 +116,7 @@ class userServices {
   async softDelete(req, res) {
     try {
       const id = req.user._id;
-      const okUser = await _user.findOne({ _id: id });
+      const okUser = await userModel.findOne({ _id: id });
 
       //check it user DB isDeletted true or not
       //User Not Found
@@ -129,7 +128,7 @@ class userServices {
       }
 
       //User Deleted
-      const myUser = await _user
+      const myUser = await userModel
         .findByIdAndUpdate(id, { isDeleted: true })
         .then((item) => {
           let resPayload = {
@@ -151,11 +150,11 @@ class userServices {
     try {
       //User Profile Details
       const idUser = req.user._id;
-      // const user = await _user
+      // const user = await userModel
       //   .findById(idUser)
       //   .select("firstName lastName email address");
 
-      const user = await _user.findById(idUser);
+      const user = await userModel.findById(idUser);
       const addressDetails = {
         HouseNo: user.address.houseNo,
         City: user.address.city,
@@ -251,7 +250,7 @@ class userServices {
   async userQuotes(req, res) {
     try {
       const idUser = req.user._id;
-      const user = await _user.findById(idUser, { firstName: 1 });
+      const user = await userModel.findById(idUser, { firstName: 1 });
 
       const findQuotes = await Quote.find(
         { userId: user._id },
@@ -292,9 +291,7 @@ class userServices {
   //aggregate : find all user data
   async totalUserWithQuotes(req, res) {
     try {
-      //const idUser = req.user._id;
-      //const user = await _user.findById(idUser);
-      let allUserQuotes = await _user.aggregate([
+      let allUserQuotes = await userModel.aggregate([
         {
           $lookup: {
             from: "quotes",
@@ -304,16 +301,63 @@ class userServices {
           },
         },
         {
-          '$project': {
-              '_id':0,
-              'firstName': 1, 
-              'Quotes': {
-                  'title': 1
-              }
-          }
-      },
-      
+          $project: {
+            _id: 0,
+            firstName: 1,
+            Quotes: {
+              title: 1,
+            },
+          },
+        },
       ]);
+      //return res.send(allUserQuotes)
+      let resPayload = {
+        message: MESSAGES.PROFILE,
+        payload: allUserQuotes,
+      };
+      Response.success(res, resPayload);
+    } catch (err) {
+      let resPayload = {
+        message: MESSAGES.SERVER_ERROR,
+        payload: {},
+      };
+      return Response.error(res, resPayload, 500);
+    }
+  }
+
+  //aggregate : get token single user data with quotes
+  async getAggregationQuotes(req, res) {
+    try {
+      let tokenId = req.user._id;
+      
+      let allUserQuotes = await userModel.aggregate([
+        {
+          $lookup: {
+            from: "quotes",
+            localField: "_id",
+            foreignField: "userId",
+            as: "Quotes",
+          },
+        },
+        {
+          $match: {
+            _id: tokenId,
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            firstName: 1,
+            Quotes: {
+              title: 1,
+              by:1,
+            },
+          },
+        },
+      ]);
+
+      //
+      
       //return res.send(allUserQuotes)
       let resPayload = {
         message: MESSAGES.PROFILE,
