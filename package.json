@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -r esm-wallaby app"
-    
+    "start": "nodemon -r esm-wallaby src/app"
   },
   "keywords": [],
   "author": "",

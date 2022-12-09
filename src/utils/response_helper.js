@@ -1,4 +1,4 @@
-import MESSAGES from "../helpers/commonMessage.js";
+import MESSAGES from "./common_message.js";
 
 //predefined strcture
 class Response {
@@ -10,14 +10,14 @@ class Response {
     };
     return res.status(statuscode).send(resPayload);
   }
-  error(res, data={}, statusCode = 500) {
+  error(res, data = {}, statusCode = 500) {
     let resPayload = {
       status: false,
-      message:MESSAGES.SERVER_ERROR ,
-       //message: data.message,
+      message: MESSAGES.SERVER_ERROR,
+      //message: data.message,
       payload: data.payload,
     };
-     
+
     return res.status(statusCode).send(resPayload);
   }
 }

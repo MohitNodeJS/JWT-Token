@@ -1,14 +1,14 @@
-import userModel from "../Models/user.js";
-import Response from "../helpers/responseHelper.js";
+import userModel from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import MESSAGES from "../helpers/commonMessage.js";
-import uploadImage from "../helpers/multerHelper";
-import Quote from "../Models/quotes.js";
+import MESSAGES from "../utils/common_message.js";
+import uploadImage from "../utils/multer_helper";
+import Quote from "../models/quotes.js";
+import Helper from "../utils/helper.js";
 
 class userServices {
   //Register User
-  async register(req, res) {
+  async userRegister(req, res) {
     try {
       //email validation check
       let email = await userModel.findOne({ email: req.body.email });
@@ -16,7 +16,7 @@ class userServices {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
-        return Response.success(res, resPayload);
+        return Helper.success(res, resPayload);
       }
       //save data
       let myUser = new userModel(req.body);
@@ -24,18 +24,18 @@ class userServices {
       let resPayload = {
         message: MESSAGES.EMAIL__SUCCESS,
       };
-      return Response.success(res, resPayload);
+      return Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: err.message,
         payload: {},
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload);
     }
   }
 
   //Login user
-  async login(req, res) {
+  async userLogin(req, res) {
     try {
       const ExtUser = await userModel.findOne({ email: req.body.email });
       //user account deleted
@@ -43,14 +43,14 @@ class userServices {
         let resPayload = {
           message: MESSAGES.LOGINuserModel_DELECTED,
         };
-        return Response.error(res, resPayload);
+        return Helper.error(res, resPayload);
       } else {
         //Invalid Credentials
         if (!ExtUser) {
           let resPayload = {
             message: MESSAGES.LOGIN_ERROR,
           };
-          return Response.error(res, resPayload);
+          return Helper.error(res, resPayload);
         }
         //Password Compare
         const validPassword = await bcrypt.compare(
@@ -73,12 +73,12 @@ class userServices {
       let resPayload = {
         message: MESSAGES.LOGIN_DELETE,
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload);
     }
   }
 
   // Update user
-  async updateById(req, res) {
+  async userUpdate(req, res) {
     try {
       const idUser = req.user._id;
       const ExtUser = await userModel
@@ -90,7 +90,7 @@ class userServices {
         let resPayload = {
           message: MESSAGES.EMAIL,
         };
-        return Response.success(res, resPayload);
+        return Helper.success(res, resPayload);
       }
 
       //Successfully updated data
@@ -103,17 +103,17 @@ class userServices {
         message: MESSAGES.UPDATED_SUCCESS,
         payload: user,
       };
-      return Response.success(res, resPayload);
+      return Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: err.message,
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload);
     }
   }
 
   //soft delete
-  async softDelete(req, res) {
+  async userDelete(req, res) {
     try {
       const id = req.user._id;
       const okUser = await userModel.findOne({ _id: id });
@@ -124,7 +124,7 @@ class userServices {
         let resPayload = {
           message: MESSAGES.DELETE_NOT_FOUND,
         };
-        return Response.success(res, resPayload);
+        return Helper.success(res, resPayload);
       }
 
       //User Deleted
@@ -134,19 +134,19 @@ class userServices {
           let resPayload = {
             message: MESSAGES.DELETE_USER,
           };
-          return Response.success(res, resPayload);
+          return Helper.success(res, resPayload);
         });
     } catch (error) {
       let resPayload = {
         message: err.message,
         payload: {},
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload);
     }
   }
 
   //myprofile using token get method
-  async myprofile(req, res) {
+  async userProfile(req, res) {
     try {
       //User Profile Details
       const idUser = req.user._id;
@@ -173,39 +173,40 @@ class userServices {
         message: MESSAGES.PROFILE,
         payload: displayData,
       };
-      return Response.success(res, resPayload);
+      return Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: err.message,
         payload: {},
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload);
     }
   }
 
   //multer file upload
-  async multer(req, res) {
+  fileUpload(req, res) {
     try {
-      //upload Image
-      await uploadImage(req, res, (err) => {
-        //File Not Uploaded
+      uploadImage(req, res, (err) => {
         if (err) {
-          res.status(500).send({
+          let resPayload = {
             message: MESSAGES.FILE_NOT_UPLOADED,
-          });
+            payload: {},
+          };
+          return Helper.success(res, resPayload);
         } else {
-          //File Uploaded
-          res.status(200).send({
+          let resPayload = {
             message: MESSAGES.FILE_UPLOADED,
-          });
+            payload: {},
+          };
+          return Helper.success(res, resPayload);
         }
       });
     } catch (err) {
       let resPayload = {
-        message: err.message,
+        message: MESSAGES.SERVER_ERROR,
         payload: {},
       };
-      return Response.error(res, resPayload);
+      return Helper.error(res, resPayload, 500);
     }
   }
 
@@ -213,6 +214,18 @@ class userServices {
   async addQuotes(req, res) {
     try {
       const idUser = req.user._id;
+
+      const okUser = await userModel.findOne({ _id: idUser });
+
+      //check it user DB isDeletted true or not
+      //User Not Found
+      if (okUser.isDeleted == true) {
+        let resPayload = {
+          message: MESSAGES.DELETE_NOT_FOUND,
+        };
+        return Helper.success(res, resPayload);
+      }
+
       //onsole.log(idUser)
       let attribute = {
         title: req.body.title,
@@ -228,21 +241,21 @@ class userServices {
             message: MESSAGES.QUOTES_SUCCESS,
             payload: value.title,
           };
-          return Response.success(res, resPayload);
+          return Helper.success(res, resPayload);
         })
         .catch((err) => {
           let resPayload = {
             message: err,
             payload: {},
           };
-          return Response.error(res, resPayload);
+          return Helper.error(res, resPayload);
         });
     } catch (err) {
       let resPayload = {
         message: MESSAGES.SERVER_ERROR,
         payload: {},
       };
-      return Response.error(res, resPayload, 500);
+      return Helper.error(res, resPayload, 500);
     }
   }
 
@@ -278,18 +291,18 @@ class userServices {
         message: MESSAGES.PROFILE,
         payload: finalUser,
       };
-      Response.success(res, resPayload);
+      Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: MESSAGES.SERVER_ERROR,
         payload: {},
       };
-      return Response.error(res, resPayload, 500);
+      return Helper.error(res, resPayload, 500);
     }
   }
 
   //aggregate : find all user data
-  async totalUserWithQuotes(req, res) {
+  async totalUserQuotes(req, res) {
     try {
       let allUserQuotes = await userModel.aggregate([
         {
@@ -315,13 +328,13 @@ class userServices {
         message: MESSAGES.PROFILE,
         payload: allUserQuotes,
       };
-      Response.success(res, resPayload);
+      Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: MESSAGES.SERVER_ERROR,
         payload: {},
       };
-      return Response.error(res, resPayload, 500);
+      return Helper.error(res, resPayload, 500);
     }
   }
 
@@ -329,7 +342,6 @@ class userServices {
   async getAggregationQuotes(req, res) {
     try {
       let tokenId = req.user._id;
-      
       let allUserQuotes = await userModel.aggregate([
         {
           $lookup: {
@@ -350,26 +362,24 @@ class userServices {
             firstName: 1,
             Quotes: {
               title: 1,
-              by:1,
+              by: 1,
             },
           },
         },
       ]);
 
-      //
-      
       //return res.send(allUserQuotes)
       let resPayload = {
         message: MESSAGES.PROFILE,
         payload: allUserQuotes,
       };
-      Response.success(res, resPayload);
+      return Helper.success(res, resPayload);
     } catch (err) {
       let resPayload = {
         message: MESSAGES.SERVER_ERROR,
         payload: {},
       };
-      return Response.error(res, resPayload, 500);
+      return Helper.error(res, resPayload, 500);
     }
   }
 }

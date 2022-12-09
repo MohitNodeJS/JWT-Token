@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-import { addressSchema } from "../Models/address";
+import { addressSchema } from "./address.js";
 import { nanoid } from "nanoid";
 
 //soft delete
@@ -63,5 +63,5 @@ userSchema.pre("findOneAndUpdate", async function (next) {
   }
 });
 
-let _user = mongoose.model("user", userSchema);
-export default _user;
+let userModel = mongoose.model("user", userSchema);
+export default userModel;

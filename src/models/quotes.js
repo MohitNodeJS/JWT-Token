@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
-import _user from "./user";
+//import _user from "./user.js";
 import { nanoid } from "nanoid";
 
 const quotesSchema = new Schema(
@@ -22,7 +22,6 @@ const quotesSchema = new Schema(
       type: String,
       ref: "users",
     },
-    //address:addressSchema,
   },
   { timestamps: true } //timestamps : save the current time of the document created
 );

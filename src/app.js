@@ -6,11 +6,11 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 import dotenv from "dotenv";
-dotenv.config();//read .env file
+dotenv.config(); //read .env file
 
 import mongoose from "mongoose";
-import Route from "./Router/route.js";
-
+import Route from "./router/route.js";
+console.log(process.env.MONGODB_CONNECTION);
 mongoose
   .connect(process.env.MONGODB_CONNECTION)
   .then(() => {
@@ -22,9 +22,5 @@ mongoose
 
 Route(app);
 
+//app.listen(3100);
 app.listen(process.env.PORT);
-
-
-
-
-

@@ -1,4 +1,4 @@
-import joi from "joi";
+import joi from "joi"
 const validationHelper = (route, method) => {
   let obj = {};
   switch (method) {
@@ -20,7 +20,7 @@ const validationHelper = (route, method) => {
       obj = {
         "/register": userSchema,
         "/login": userSchemaLogin,
-        "/quotesRegister":quotesSchema
+        "/quotesRegister": quotesSchema,
       };
       return obj[route];
     default:
@@ -65,9 +65,7 @@ const userSchemaUpd = joi.object({
   }),
 });
 
-const quotesSchema=joi.object({
+const quotesSchema = joi.object({
   title: joi.string().min(3).max(15).required(),
-  by:joi.string().min(3).max(15).required(),
-})
-
-
+  by: joi.string().min(3).max(15).required(),
+});

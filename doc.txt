@@ -1,3 +1,13 @@
+...other config files
+src
+    models - DB models
+    routes - Routes
+    controllers/services -  Businnes logic
+    store - Database calls
+    utils - utility functions
+----------------------------------
+
+
 git branch
  git status
  git add .

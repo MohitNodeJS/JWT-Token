@@ -49,6 +49,12 @@
 * #### QUOTES DETAILS : GET API -- (http://127.0.0.1:3100/quotesDetails)
     Auth/Bearer : Add Token User // Display Name,Email,Quotes [ Title, By ]
 
+* #### GET USER QUOTES USING AGGREGATION : GET API (http://127.0.0.1:3100/getAggregationQuotes)
+     Auth/Bearer : Add Token User // Display Name,Quotes [ Title]
+     
+* ####     
+
+
 ## Package Explanation
 * ####  Express Framework:
   fast, assertive, essential and moderate web framework of Node.js
@@ -94,16 +100,20 @@
 * #### Middleware : 
   Express.js is a routing and Middleware framework for handling the different routing of the webpage and it works between the request and response
 
+* #### Nano ID : 
+  Nano ID is nano-sized unique string ID generator for JavaScript
+
 
 
 ## SetUp Development Environment
-  * npm init
-  * npm i express
-  * npm i mongoose
-  * npm i jsonwebtoken
-  * npm i joi
-  * npm i esm
-  * npm i dotenv
-  * npm i bcryptjs
-  * npm i soft-delete-plugin-mongoose
-  
+  * `npm init`
+  * `npm i express`
+  * `npm i mongoose`
+  * `npm i jsonwebtoken`
+  * `npm i joi`
+  * `npm i esm : Remove`
+  * `npm i dotenv`
+  * `npm i bcryptjs`
+  * `npm i soft-delete-plugin-mongoose`
+  * `npm i esm-wallaby`
+  * `npm i nanoid`
